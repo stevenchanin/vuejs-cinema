@@ -1,8 +1,4 @@
 import Vue from 'vue';
-import './style.scss';
-
-import MovieList from './components/MovieList.vue';
-import MovieFilter from './components/MovieFilter.vue';
 
 import VueResource from 'vue-resource';
 Vue.use(VueResource);
@@ -19,6 +15,9 @@ Object.defineProperty(Vue.prototype, '$bus', {
   get() { return this.$root.bus }
 });
 
+import './style.scss';
+import Overview from './components/Overview.vue';
+
 new Vue({
   el: "#app",
 
@@ -31,7 +30,9 @@ new Vue({
     bus
   },
 
-  components: { MovieList, MovieFilter },
+  components: {
+    Overview
+  },
 
   created() {
     this.$http.get('/api').then(
