@@ -13,6 +13,11 @@ Object.defineProperty(Vue.prototype, '$moment', {
   get() { return this.$root.moment }
 });
 
+const bus = new Vue({});
+Object.defineProperty(Vue.prototype, '$bus', {
+  get() { return this.$root.bus }
+});
+
 new Vue({
   el: "#app",
 
@@ -21,7 +26,8 @@ new Vue({
     time: [],
     movies: [],
     moment,
-    day: moment()
+    day: moment(),
+    bus
   },
 
   methods: {
@@ -48,5 +54,7 @@ new Vue({
         console.log('error!');
       }
     );
+
+    this.$bus.$on('check-filter', this.checkFilter)
   }
 });
