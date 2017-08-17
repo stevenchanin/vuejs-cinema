@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import './style.scss';
 
 import VueResource from 'vue-resource';
 Vue.use(VueResource);
@@ -15,8 +16,11 @@ Object.defineProperty(Vue.prototype, '$bus', {
   get() { return this.$root.bus }
 });
 
-import './style.scss';
-import Overview from './components/Overview.vue';
+import VueRouter from 'vue-router';
+Vue.use(VueRouter);
+
+import routes from './util/routes';
+const router = new VueRouter({ routes });
 
 new Vue({
   el: "#app",
@@ -30,9 +34,7 @@ new Vue({
     bus
   },
 
-  components: {
-    Overview
-  },
+  router,
 
   created() {
     this.$http.get('/api').then(
